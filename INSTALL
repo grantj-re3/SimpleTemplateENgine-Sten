@@ -1,0 +1,224 @@
+1. APPLICATION ENVIRONMENT
+
+This web app has been tested in the following environment:
+- PHP Version 5.4.1
+- Apache/2.2.22 (Unix)
+- Fedora release 17 (Beefy Miracle)
+- 3.3.4-5.fc17.x86_64 #1 SMP Mon May 7 17:29:34 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux
+
+It is expected that the script will also operate with little or no modification
+under other versions of php, apache web server and operating system.
+
+
+2. INSTALLATION
+
+2.1 DEFINITION
+
+In the context of Sten, an html (or web) template is an ordinary html file
+(typically with associated CSS and images) with one additional feature - it
+contains one or more Sten tokens. These tokens will be replaced by other
+text as determined by the index.php file (or other php file).  Typically,
+all pages within a particular web site will use the same html template but
+each page (corresponding to a different index.php file) will 'fill' the
+template with different content. (See common/template.html below.)
+
+2.2 ASSUMPTIONS
+
+- That you have a basic understanding of PHP, HTML and your web server.
+- That your web server is configured as follows.
+  * Can run PHP scripts.
+  * If a file index.php is found within a web directory, and that directory is
+    specified via URL, then the web server will invoke the index.php script.
+- That you are using a Linux, Unix or Unix-like environment similar to that
+  described under APPLICATION ENVIRONMENT or you can translate these
+  instructions into equivalent commands for your operating system.
+
+
+2.3 INSTRUCTIONS
+
+- Download from github into a location accessible by your web server.
+
+- Checkout the desired version/tag if applicable.
+
+- Update the config for your site, including:
+  * Find or create a suitable web html-template (together with related CSS
+    and images)
+  * If required, create a symbolic link to the html-template (or make a copy
+    or adjust the file path parameter to $tpl->show() within index.php).
+  * If required, create a symbolic link to the CSS file (or make a copy or
+    adjust the CSS file path parameter within the html-template).
+
+- Access each index.php or other non-class PHP script via your web browser.
+
+See the EXAMPLE INSTALLATION OF THIS DEMO below.
+
+
+2.4 TYPICAL FILES IN A STEN WEB SITE INSTALLATION
+
+Some of the files discussed below do not exist in the git repository
+which you download from this site - they need to be created by
+making a symbolic link (or file copy) as per the section 'EXAMPLE
+INSTALLATION OF THIS DEMO' below.
+
+
+siteroot.txt:
+  [One instance of siteroot.txt is required per Sten web site.]
+
+  A Sten web site is expected to have one of these files in the top-most
+  (ie. root) directory of the Sten web site tree. It marks the top of the
+  web site so that class.siteroot.php can determine how to find other
+  directories and files using relative addresses (eg. it is often used to
+  find common/class.sten.php). The contents of siteroot.txt is ignored.
+
+
+class.siteroot.php:
+  [One instance of class.siteroot.php is expected for each directory
+  where you have a static-like php web-page. You could make a copy in
+  each directory where it is required, but under Linux/Unix it probably
+  makes more sense to make a symbolic link which points to a single
+  copy in the directory at the top of your Sten web site.]
+
+  Methods in this file are used to find the root (ie. top) of the
+  Sten web site by searching for the file siteroot.txt.
+
+  Neither class.siteroot.php nor siteroot.txt are essential for using
+  common/class.sten.php. However, they are helpers which allow your static-like
+  php web pages to be written independently from their position in the
+  filesystem tree. Because of this, it allows you to develop your web
+  site on some development server (eg. at home) then move it to a
+  production server (eg. at your ISP) in a different filesystem location
+  or different position relative to the Apache DocumentRoot without
+  making ANY changes to your files.
+
+
+index.php or other WEBPAGE.php:
+  [One or more instance of index.php or other WEBPAGE.php is expected in each
+  Sten web site directory from which you want to serve static-like web pages.]
+
+  The purpose of this page is to:
+  - optionally find the relative path to the root directory from it's own
+    directory (using class.siteroot.php).
+
+  - serve static-like web page content wrapped in an html-template which
+    provides a consistent look and consistent menu navigation across all
+    pages within the Sten web site.
+
+  - configure tokens (which have a matching name within the html-template)
+    such that common/class.sten.php can replace those tokens with appropriate
+    text for the particular php page (and replace tokens with different text
+    for a different page).
+
+
+common/class.sten.php:
+  [One instance of common/class.sten.php is required per Sten web site.]
+
+  This file contains the core Sten classes. It understands different types of
+  tokens eg. ones which shall be replaced with the contents of a string or
+  others which shall be replaced with the contents of a file and so on.
+
+
+common/template.html:
+  [One instance of html-template is expected per Sten web site
+  (although it should be feasible to have more than one if you
+  wanted more than one template/style within the same web site).
+  For this demo, we have named the html-template common/template.html.]
+
+  This file is an html-template. That means:
+  - it is an html web page
+  - it typically has its own style (defined in CSS such as common/style.css
+    and images such as common/images/*.jpg and common/images/*.gif)
+  - it contains tokens which you have added and which will be replaced with text
+    as determined by token configuration within index.php or other WEBPAGE.php
+
+
+common/style.css:
+  [Typically there will be one or more CSS files per html-template file.
+  For this demo, we have named the CSS file common/style.css & it is referenced
+  in the related html-template file common/template.html AFTER token
+  substitution (see the 'linkCss1' token in common/template.html & all index.html
+  files).]
+
+  This is a normal CSS file. There is no token string substitution which
+  can take place within it. Please remember that RELATIVE references to image
+  files from within a CSS file are relative to the CSS file location (not the
+  html-template location).
+  
+
+*.inc.html:
+  Sten permits a token of type 'file_glob'. This allows a single token to
+  be replaced with the combined content of all the files with the specified
+  prefix (ie. specified in the token value field) and with the suffix of
+  '.inc.html'.
+
+
+common/class.csvtable.php:
+  [One instance of common/class.csvtable.php can be optionally used per Sten
+  web site.]
+
+  This file is EXPERIMENTAL only and is incomplete. The purpose of this file
+  is to create a html-table within a web page (based on the contents of the
+  specified CSV file).
+
+
+3. EXAMPLES
+
+
+3.1 EXAMPLE INSTALLATION OF THIS DEMO
+
+Scenario:
+
+ - This Sten demo to be installed without modification.
+ - This PHP web app to be installed in $HOME/public_html/sten_demo
+ - The Apache web server will serve PHP pages under directory $HOME/public_html
+ - The URL for a web browser to access the above location is http://MYSERVER/~USER/sten_demo/
+
+ 
+Instructions:
+
+cd
+mkdir public_html
+chmod 755 public_html
+chmod 711 .
+# SELinux permissions (if applicable)
+sudo setsebool -P httpd_enable_homedirs true  # Takes a few minutes
+chcon -R -t httpd_sys_content_t public_html   # May not be required
+
+git clone https://github.com/grantj-re3/SimpleTemplateENgine-Sten.git ~/public_html/sten_demo
+cd public_html/sten_demo
+
+# If you want a particular release:
+git tag			# List tagged releases
+git checkout ...	# Checkout the desired release
+
+# Add symbolic links (or copy files) so that generic file references
+# (style.css and template.html) match the specific references used in
+# your html-template and index.php.
+cd common
+ln -s infinitehorizon_style.css style.css
+ln -s infinitehorizon.tpl.html template.html
+
+# Add symbolic link (or copy file) so that class.siteroot.php is present
+# in every directory when you reference index.php (or other FILE.php).
+cd ../demo2
+ln -s ../class.siteroot.php .
+
+Using your web browser, navigate to the 2 URLs used in this demo:
+  http://MYSERVER/~USER/sten_demo/		# Home page
+  http://MYSERVER/~USER/sten_demo/demo2/	# Demo page 2
+
+Celebrate!
+
+If you want to figure out how the pieces work together:
+- look at the contents of each web page
+- look at the contents of the files in:
+  * $HOME/public_html/sten_demo		# Files from which the 'Home' page is built
+  * $HOME/public_html/sten_demo/demo2	# Files from which 'Demo page 2' is built
+  * $HOME/public_html/sten_demo/common	# HTML-template, CSS, images and sidebar files/dirs
+- experiment by:
+  * adding your own text to existing files
+  * adding new files
+  * adding new tokens (to both the html-template and any/all index.php files
+    which will populate them)
+  * downloading a free CSS template from the internet (or creating your
+    own) and changing the look of the Sten demo without changing the contents
+

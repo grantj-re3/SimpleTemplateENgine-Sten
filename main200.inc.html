@@ -1,0 +1,34 @@
+<h3>Purpose</h3>
+
+<p>
+	An 'HTML template' is an html file where special tokens (or keys)
+	will be replaced by other content as determined by the properties of
+	the tokens.
+</p>
+
+<p>
+	Style and layout are determined by one or more common CSS files partnered
+	with a single HTML template file. However the tokens within the template
+	allow you to have individual content on each page on your web-site by
+	having one PHP file (eg. index.php) per web-page which loads the
+	tokens with appropriate content.
+</p>
+
+<p>
+	Sten sends the specified 'HTML template' to stdout (ie. the
+	browser), while replacing template-file tokens from the Sten template-object
+	on-the-fly. A maximum of 1 substitution is permitted per template-line.
+</p>
+
+<p>
+	Within the template file,
+	<pre>
+	&lt;!-- {{TOKEN_NAME}} --&gt;
+	</pre>
+	will be replaced.
+	TOKEN_NAME can be any upper or lower case alpha-numeric plus dot '.' and
+	underscore '_'.  In order to be replaced, the TOKEN_NAME in the html-template file must
+	match a TOKEN_NAME in the Sten object.  The type of replacement shall be
+	determined by the TOKEN_TYPE and TOKEN_VALUE associated with the TOKEN_NAME.
+</p>
+

@@ -1,0 +1,31 @@
+<h2>Demo of Sten features</h2>
+
+<!-- {{demo_text}} -->
+<!-- {{demo_file}} -->
+
+<h3>Sten 'file_tpl' feature</h3>
+<p>
+	The whole main pane on this page is produced via a file-template. That is, the common html-template
+	is replacing a token with a (child) html-template file (which can also contain replacement tokens).
+</p>
+
+<h3>Sten 'file_glob' feature</h3>
+<p>
+        A Sten 'file_glob' token is producing the whole side-pane.
+	That is, the token will be replaced with the contents of all
+	files which match the prefix given by the token-value and
+	match the suffix ".inc.html"
+</p>
+
+<h3>Sten 'last_mod' feature</h3>
+<p>
+	A Sten 'last_mod' token is producing the date/time seen at the bottom of this page after the 'Last modified' text.
+</p>
+
+<h3>Sten 'file_csv' feature (experimental only)</h3>
+<p>
+	The table below is produced via the 'file_csv' token.
+	(This feature is currently experimental.)
+</p>
+<!-- {{demo_csv_table}} -->
+
