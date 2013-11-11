@@ -1,10 +1,16 @@
 1. APPLICATION ENVIRONMENT
 
-This web app has been tested in the following environment:
-- PHP Version 5.4.1
-- Apache/2.2.22 (Unix)
-- Fedora release 17 (Beefy Miracle)
-- 3.3.4-5.fc17.x86_64 #1 SMP Mon May 7 17:29:34 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux
+This web app has been tested in the following environments.
+
+* Fedora release 17 (Beefy Miracle)
+  - 3.3.4-5.fc17.x86_64 #1 SMP Mon May 7 17:29:34 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux
+  - PHP Version 5.4.1
+  - Apache/2.2.22 (Unix)
+
+* Red Hat Enterprise Linux Server release 6.4 (Santiago)
+  - 2.6.32-358.el6.x86_64 #1 SMP Tue Jan 29 11:47:41 EST 2013 x86_64 x86_64 x86_64 GNU/Linux
+  - PHP Version 5.3.3
+  - Apache/2.2.15
 
 It is expected that the script will also operate with little or no modification
 under other versions of php, apache web server and operating system.

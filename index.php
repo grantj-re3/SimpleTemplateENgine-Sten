@@ -16,7 +16,7 @@
   $tpl->setLastMod(filemtime("$_SERVER[SCRIPT_FILENAME]"),'D j F Y -- H:i:s');	// Supply last mod time of caller
   $tpl->addToken('modified','last_mod', "");
 
-  $tpl->addToken('title',        'text',      "Sten demo - home page");
+  $tpl->addToken('title',        'text',      "Sten demo - home");
   $tpl->addToken('linkCss1',     'text',      "$webSitePath/common/style.css");
   $tpl->addToken('root_path',    'text',      "$webSitePath");
   $tpl->addToken('main_content', 'file_glob', "main");
